@@ -3,8 +3,11 @@ from math import floor
 from math import ceil
 import os
 from random import choice
+import sys
 import re
 from colorama import Fore, Style
+
+SCRIPT_PATH = os.path.dirname(os.path.realpath(sys.argv[0]))
 
 
 def wait():
@@ -52,12 +55,12 @@ def instructions():
 
 def get_genre(f_name):
     """Randomly choose a genre from available values"""
-    return choice(list(open(f_name))).replace('\n', '')
+    return choice(list(open(os.path.join(SCRIPT_PATH, f_name)))).replace('\n', '')
 
 
 def get_name(genre):
     """Randomly choose a genre for the user"""
-    name = choice(list(open(genre)))
+    name = choice(list(open(os.path.join(SCRIPT_PATH, genre))))
     name = name.replace('\n', '')
     name = name.upper()
     return name
@@ -129,11 +132,11 @@ def print_stats():
     """Print Stats for user, if he wants to see it,
     or compulsorily at the end of the game"""
     clear_screen()
-    print_main_info("You have played {} times".format(PLAYED))
-    print("You have won " + Fore.LIGHTGREEN_EX + Style.BRIGHT +
-          str(WON) + Style.RESET_ALL + " times")
-    print("You have lost " + Fore.LIGHTRED_EX + Style.BRIGHT +
-          str(LOSS) + Style.RESET_ALL + " times")
+    print_main_info("You played {} time(s)".format(PLAYED))
+    print("You won " + Fore.LIGHTGREEN_EX + Style.BRIGHT +
+          str(WON) + Style.RESET_ALL + " time(s)")
+    print("You lost " + Fore.LIGHTRED_EX + Style.BRIGHT +
+          str(LOSS) + Style.RESET_ALL + " time(s)")
     print_new_line()
 
 
